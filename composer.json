@@ -1,0 +1,5 @@
+{
+    "require": {
+        "maxmind/minfraud": "~1.0"
+    }
+}
