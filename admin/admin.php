@@ -4,7 +4,7 @@ use MaxMind\MinFraud;
 /**
  * class that controls the admin interface
  */
-class WMMMF_admin
+class WMMMF_Admin
 {
     public function __construct()
     {
@@ -41,13 +41,13 @@ class WMMMF_admin
               'name' => __('Account ID', 'woocommerce'),
               'type' => 'text',
               'desc' => __('Maxmind Account/User ID found in your maxmind account', 'woocommerce'),
-              'id'   => 'wc_settings_tab_demo_title'
+              'id'   => 'WMMMF_account_ID'
           ),
           'description' => array(
               'name' => __('License Key', 'woocommerce'),
               'type' => 'text',
               'desc' => __('License key generated on the backend', 'woocommerce'),
-              'id'   => 'wc_settings_tab_demo_description'
+              'id'   => 'WMMMF_license_key'
           ),
           'section_end' => array(
                'type' => 'sectionend',
@@ -59,4 +59,4 @@ class WMMMF_admin
     }
 }
 
-new WMMMF_admin;
+new WMMMF_Admin();

@@ -20,6 +20,7 @@ class Woocommerce_Maxmind_Minfraud
   function __construct()
   {
     $this->load_dependencies();
+    // echo "<h1>". get_option( "wc_settings_tab_demo_title" ) . "</h1>";
   }
 
   public function load_dependencies()
@@ -27,6 +28,7 @@ class Woocommerce_Maxmind_Minfraud
     //require composer autoload
     require 'vendor/autoload.php';
     require ( plugin_dir_path( __FILE__ ) . 'admin/admin.php');
+    require ( plugin_dir_path( __FILE__ ) . 'includes/fraudcheck.php');
   }
 }
 
