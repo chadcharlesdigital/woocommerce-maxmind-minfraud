@@ -14,7 +14,22 @@ class WMMMF_Fraudcheck
         # The constructor for MinFraud takes your account ID, your license key, and
         # optionally an array of options.
         $this->mf = new MinFraud(get_option("WMMMF_account_ID"), get_option("WMMMF_license_key"));
-        $this->check_score();
+        // echo "<h1>" . get_option("WMMMF_account_ID") . "</h1>";
+        // echo "<h1>" . get_option("WMMMF_license_key") . "</h1>";
+        // $this->check_score();
+        // $this->set_billing([]);
+        // $this->set_device([]);
+        // $this->get_score();
+    }
+
+    public function set_billing($array)
+    {
+      $this->request = $this->mf->withBilling($array);
+    }
+
+    public function set_device($array)
+    {
+      $this->request = $this->mf->withDevice($array);
     }
 
     public function check_score()
@@ -105,6 +120,32 @@ class WMMMF_Fraudcheck
         print($scoreResponse->riskScore . "<br>");
 
     }
+
+    function get_score()
+    {
+      $scoreResponse = $this->request->score();
+
+      Woocommerce_Maxmind_Minfraud::whats_that($scoreResponse, true, "maxmind score");
+    }
 }
 
-new WMMMF_Fraudcheck();
+$min_fraud = new WMMMF_Fraudcheck();
+$min_fraud->set_billing([
+    'first_name'         => 'First',
+    'last_name'          => 'Last',
+    'company'            => 'Company',
+    'address'            => '101 Address Rd.',
+    'address_2'          => 'Unit 5',
+    'city'               => 'New Haven',
+    'region'             => 'CT',
+    'country'            => 'US',
+    'postal'             => '06510',
+    'phone_number'       => '323-123-4321',
+    'phone_country_code' => '1',
+]);
+
+$min_fraud->set_device([
+      'ip_address'  => '81.2.69.160',
+  ]);
+
+  // $min_fraud->get_score();
